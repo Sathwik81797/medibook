@@ -1,4 +1,4 @@
-iiconst SPECIALTIES = [
+const SPECIALTIES = [
   { id: "cardiology", name: "Cardiology", icon: "❤️", blurb: "Heart & blood vessels" },
   { id: "dermatology", name: "Dermatology", icon: "✨", blurb: "Skin, hair & nails" },
   { id: "pediatrics", name: "Pediatrics", icon: "🧸", blurb: "Child health" },
@@ -30,7 +30,7 @@ const DOCTORS = [
  * Paste the Google Apps Script web-app URL after you deploy Code.gs
  * (see SETUP.md). Leave empty to keep local-only bookings.
  */
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzUAT8T4dIkfpdp9Cdw_RfVKTv6j92evqhg6WBDDg_RXYpopBa4FOIgk44BKTurZzDj5w/exec[O";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzUAT8T4dIkfpdp9Cdw_RfVKTv6j92evqhg6WBDDg_RXYpopBa4FOIgk44BKTurZzDj5w/exec";
 const CLINIC_NOTIFY_EMAIL = "doctynacademy@gmail.com";
 
 const specName = (id) => SPECIALTIES.find((s) => s.id === id)?.name || id;
