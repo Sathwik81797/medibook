@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediBook — Book Doctor Appointments Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav">
+    <a class="logo" href="#home">
+      <span class="logo-mark">+</span>
+      MediBook
+    </a>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#specialties">Specialties</a>
+      <a href="#doctors">Doctors</a>
+      <a href="#how">How it works</a>
+      <a href="#appointments">My bookings</a>
+    </nav>
+    <button class="btn btn-primary" id="navBookBtn">Book appointment</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-copy">
+      <p class="eyebrow">Trusted online consultations</p>
+      <h1>Find the right doctor.<br />Book in minutes.</h1>
+      <p class="lede">Search by specialty — cardiology, pediatrics, dermatology and more. See availability and confirm your slot instantly.</p>
+      <div class="hero-search">
+        <select id="heroSpecialty">
+          <option value="">All specialties</option>
+        </select>
+        <input type="text" id="heroQuery" placeholder="Doctor name or symptom…" />
+        <button class="btn btn-primary" id="heroSearchBtn">Find doctors</button>
+      </div>
+      <div class="hero-stats">
+        <div><strong>120+</strong><span>Verified doctors</span></div>
+        <div><strong>18</strong><span>Specialties</span></div>
+        <div><strong>4.8★</strong><span>Patient rating</span></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="next-slot">
+        <p>Next available</p>
+        <h3>Today · 4:30 PM</h3>
+        <p class="muted">Dr. Ananya Rao · Cardiologist</p>
+        <button class="btn btn-ghost" data-book="d1">Reserve this slot</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="specialties">
+    <div class="section-head">
+      <h2>Browse by specialty</h2>
+      <p>Choose the care you need. We’ll show matching doctors and open slots.</p>
+    </div>
+    <div class="specialty-grid" id="specialtyGrid"></div>
+  </section>
+
+  <section class="section alt" id="doctors">
+    <div class="section-head row">
+      <div>
+        <h2>Available doctors</h2>
+        <p id="doctorCount">Showing all doctors</p>
+      </div>
+      <div class="filters">
+        <select id="filterSpecialty"></select>
+        <select id="filterAvail">
+          <option value="">Any availability</option>
+          <option value="today">Today</option>
+          <option value="tomorrow">Tomorrow</option>
+          <option value="week">This week</option>
+        </select>
+      </div>
+    </div>
+    <div class="doctor-grid" id="doctorGrid"></div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="section-head">
+      <h2>How booking works</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span>1</span><h3>Pick a specialty</h3><p>Cardiology, dermatology, pediatrics — filter what you need.</p></div>
+      <div class="step"><span>2</span><h3>Choose a doctor</h3><p>Compare experience, fees, ratings and next open slots.</p></div>
+      <div class="step"><span>3</span><h3>Confirm your slot</h3><p>Enter details and get an instant booking confirmation.</p></div>
+    </div>
+  </section>
+
+  <section class="section alt" id="appointments">
+    <div class="section-head">
+      <h2>My appointments</h2>
+      <p>Bookings on this device are saved locally so you can review them anytime.</p>
+    </div>
+    <div id="apptList" class="appt-list"></div>
+  </section>
+
+  <footer class="footer">
+    <div>
+      <strong class="logo"><span class="logo-mark">+</span> MediBook</strong>
+      <p>Online doctor consultation & appointment booking.</p>
+    </div>
+    <p class="muted">Demo clinic portal · Not a real medical service</p>
+  </footer>
+
+  <!-- Booking modal -->
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <button class="modal-close" id="closeModal">×</button>
+      <h2>Book appointment</h2>
+      <div id="modalDoctor" class="modal-doc"></div>
+      <form id="bookForm">
+        <label>Patient full name
+          <input required name="name" placeholder="Your name" />
+        </label>
+        <div class="form-row">
+          <label>Phone
+            <input required name="phone" type="tel" placeholder="+91 …" />
+          </label>
+          <label>Age
+            <input required name="age" type="number" min="1" max="120" />
+          </label>
+        </div>
+        <label>Email
+          <input name="email" type="email" placeholder="optional" />
+        </label>
+        <div class="form-row">
+          <label>Date
+            <input required name="date" type="date" id="bookDate" />
+          </label>
+          <label>Time
+            <select required name="time" id="bookTime"></select>
+          </label>
+        </div>
+        <label>Reason for visit
+          <textarea name="reason" rows="3" placeholder="Brief symptoms or follow-up notes"></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary full">Confirm booking</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
