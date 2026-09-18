@@ -190,7 +190,7 @@ document.body.addEventListener("click", async (e) => {
           body: JSON.stringify({
             action: "cancel",
             patient: appt.patient,
-            phone: appt.phone,
+            phone: String(appt.phone || "").replace(/\D/g, ""),
             doctor: appt.doctor,
             date: appt.date,
             time: appt.time
