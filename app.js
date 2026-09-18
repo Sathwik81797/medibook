@@ -30,7 +30,7 @@ const DOCTORS = [
  * Paste the Google Apps Script web-app URL after you deploy Code.gs
  * (see SETUP.md). Leave empty to keep local-only bookings.
  */
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxoIBQf1661r4G9XSY_1dBRLb5ROHfsDLNo-DKY5kRf_tU34dll4iBaOyzWbvRgiPPOyw/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzE7hKgR0WEjryVBVKzZZrqL4mCfCXMyOFqwuHA66PEVOxZMrW_gEWFaV9AEPTvfw-SZQ/exec";
 const CLINIC_NOTIFY_EMAIL = "doctynacademy@gmail.com";
 
 const specName = (id) => SPECIALTIES.find((s) => s.id === id)?.name || id;
@@ -171,13 +171,39 @@ document.getElementById("specialtyGrid").addEventListener("click", (e) => {
   document.getElementById("doctors").scrollIntoView({ behavior: "smooth" });
 });
 
-document.body.addEventListener("click", (e) => {
+document.body.addEventListener("click", async (e) => {
   const book = e.target.closest("[data-book]");
   if (book) openModal(book.dataset.book);
+
   const cancel = e.target.closest("[data-cancel]");
   if (cancel) {
     const list = loadAppts();
-    list.splice(Number(cancel.dataset.cancel), 1);
+    const index = Number(cancel.dataset.cancel);
+    const appt = list[index];
+
+    if (GOOGLE_SCRIPT_URL && appt) {
+      try {
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            action: "cancel",
+            patient: appt.patient,
+            phone: appt.phone,
+            doctor: appt.doctor,
+            date: appt.date,
+            time: appt.time
+          })
+        });
+      } catch (err) {
+        console.error(err);
+        toast("Cancellation sync failed");
+        return;
+      }
+    }
+
+    list.splice(index, 1);
     saveAppts(list);
     renderAppts();
     toast("Appointment cancelled");
