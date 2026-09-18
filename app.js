@@ -30,7 +30,7 @@ const DOCTORS = [
  * Paste the Google Apps Script web-app URL after you deploy Code.gs
  * (see SETUP.md). Leave empty to keep local-only bookings.
  */
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzUAT8T4dIkfpdp9Cdw_RfVKTv6j92evqhg6WBDDg_RXYpopBa4FOIgk44BKTurZzDj5w/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxoIBQf1661r4G9XSY_1dBRLb5ROHfsDLNo-DKY5kRf_tU34dll4iBaOyzWbvRgiPPOyw/exec";
 const CLINIC_NOTIFY_EMAIL = "doctynacademy@gmail.com";
 
 const specName = (id) => SPECIALTIES.find((s) => s.id === id)?.name || id;
